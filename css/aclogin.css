@@ -1,0 +1,319 @@
+body, p, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+ul, li, dl, dt, dd {
+	list-style: none;
+}
+.clear {
+	clear: both;
+}
+.important {
+	color: #f00;
+}
+.acbody {
+	background: #d2edf8;
+}
+a {
+	outline: none;
+	color: #333;
+	text-decoration: none;
+}
+p.warn {
+	border: 1px solid #ffbe92;
+	padding: 6px;
+	margin-top: 12px;
+	background: #fef4eb;
+	line-height: 20px;
+	clear: both;
+	text-indent: 1em;
+}
+.loginlogo {
+	float: left;
+}
+.loginmain {
+	width: 100%;
+	position: absolute;
+	height: 474px;
+	margin-top: -237px;
+	top: 45%;
+	background: #fff;
+}
+.loginhead {
+	height: 53px;
+	width: 1000px;
+	margin: 0 auto;
+	clear: both;
+}
+.kingsLogo {
+	margin: 10px 0;
+	display: block;
+	float: left;
+}
+.loginbar {
+	clear: both;
+	width: 100%;
+	background: #5fa2da;
+	height: 360px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.loginbarMain {
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+.headbar {
+	clear: both;
+	width: 100%;
+	background: #368cd0;
+	height: 180px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-top: 1px solid #1467ac;
+}
+.headbarMain {
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+	height: 180px;
+	background: url(headbarbg.jpg) no-repeat;
+}
+.lineLogo {
+	width: 1px;
+	overflow: hidden;
+	font-size: 0;
+	zoom: 1;
+	display: block;
+	float: left;
+	background: #b7b7b7;
+	height: 18px;
+	margin: 16px 12px 0 6px;
+}
+.userlogo {
+	float: left;
+	margin: 10px 0;
+}
+.userlogo a {
+	font-family: "\5FAE\8F6F\96C5\9ED1";
+	font-weight: normal;
+	color: #666;
+	font-size: 20px;
+	line-height: 30px;
+}
+.userlogo a:hover {
+	text-decoration: none;
+}
+ul.links {
+	float: right;
+	margin: 11px 30px;
+}
+ul.links li {
+	float: left;
+	margin-left: 16px;
+	line-height: 30px;
+}
+ul.links li a {
+	color: #999;
+}
+ul.links li a:hover {
+	text-decoration: underline;
+}
+.loginBox {
+	width: 308px;
+	height: 260px;
+	background: #fff;
+	position: absolute;
+	right: 30px;
+	top: 53px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 1px 8px #666;
+	-moz-box-shadow: 0px 1px 8px #666;
+	box-shadow: 0px 1px 8px #666;
+}
+.copyright {
+	clear: both;
+	background: #f0f3f4;
+	height: 60px;
+	bottom: 0;
+	width: 100%;
+}
+.copyrightmain {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 15px 0;
+}
+.copyrightmain p {
+	line-height: 30px;
+	color: #666;
+}
+.copyrightmain p a {
+	color: #666;
+}
+.copyrightmain p a:hover {
+	text-decoration: underline;
+}
+.logintab {
+	height: 48px;
+	clear: both;
+	background: url(logintab.jpg) repeat-x;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+.logintab li {
+	width: 50%;
+	float: left;
+}
+.logintab li.selected01 {
+	background: #fff;
+	-moz-border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0 0;
+}
+.logintab li.selected02 {
+	background: #fff;
+	-moz-border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	border-radius: 0 5px 0 0;
+}
+.logintab li.selected01 a, .logintab li.selected02 a {
+	color: #333;
+}
+.logintab li a {
+	display: block;
+	width: 100%;
+	line-height: 48px;
+	font-size: 18px;
+	text-align: center;
+	font-family: "\5FAE\8F6F\96C5\9ED1";
+	font-weight: normal;
+	color: #999;
+}
+.MainLogin {
+	padding: 12px 24px;
+}
+.labbox {
+	clear: both;
+	overflow: hidden;
+	padding: 2px 0;
+}
+.labtext {
+	height: 38px;
+	line-height: 38px;
+	float: left;
+	width: 85px;
+	text-align: right;
+	padding-right: 6px;
+	font-size: 14px;
+}
+.labinput {
+	height: 38px;
+	line-height: 38px;
+	float: left;
+}
+.labinput .input {
+	margin: 5px 0;
+	padding: 4px 4px;
+	height: 20px;
+	border: 1px solid #ccc;
+	color: #666;
+	font-size: 14px;
+	width: 140px;
+	background: url(inputbg.jpg) repeat-x;
+}
+.errorbox {
+	clear: both;
+	padding: 4px 10px;
+	border: 1px solid #f5d8a5;
+	clear: both;
+	background: #fbf7f1;
+	color: #f60;
+	line-height: 20px;
+	margin-bottom: 6px;
+	display:none;
+}
+.labinput .reg {
+	margin: 6px 0 0 6px;
+	display: block;
+	height: 34px;
+	line-height: 34px;
+}
+.loginBtn {
+	background: url(loginBtn.jpg) no-repeat;
+	height: 34px;
+	width: 100px;
+	border: none;
+	cursor: pointer;
+	margin-top: 6px;
+}
+.queryreportBtn {
+	background: url(queryreportBtn.jpg) no-repeat;
+	height: 34px;
+	width: 100px;
+	border: none;
+	cursor: pointer;
+	margin-top: 6px;
+}
+.exitfunction {
+	clear: both;
+}
+.exitsys {
+	background: url(exitsys.jpg) no-repeat;
+	height: 26px;
+	width: 82px;
+	border: none;
+	cursor: pointer;
+	margin-top: 6px;
+}
+.regcount {
+	background: none;
+	border: none;
+	line-height: 32px;
+	margin-top: 6px;
+	color: #666;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.MainLogin h3 {
+	font-weight: normal;
+}
+.MainLogin h3 b {
+	font-style: normal;
+}
+.linkbox {
+	clear: both;
+	border: 1px solid #e5e5e5;
+}
+.reportFunction {
+	width: 258px;
+	border: 1px solid #ccc;
+	margin: 12px 0;
+}
+.clear {
+	clear: both;
+	width: 0;
+}
+.loginlinks {
+	float: left;
+	width: 129px;
+	line-height: 36px;
+	text-align: center;
+	border-left: 1px solid #e5e5e5;
+	border-left: 1px dotted #bbb;
+	border-top: 1px dotted #bbb;
+	margin: -1px 0 0 -1px;
+}
+.loginlinks a {
+	font-size: 14px;
+	display: block;
+	background: #f8f8f8;
+	text-align: left;
+	padding-left: 24px;
+}
+.loginlinks a:hover {
+	background: #eee;
+}

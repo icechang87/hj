@@ -1,0 +1,591 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>欢迎您使用网上业务受理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" href="css/aclogin.css" rel="stylesheet" />
+  <script type="text/javascript" src="css/jquery-1.7.2.js"></script>
+
+<script type="text/javascript">
+    var baseUrl = '/';
+    function mapUrl(url) {
+
+        var ur = url ? url.replace('~/', baseUrl || '') : '';
+
+        return ur;
+    }
+    $(function () {
+        $("#txtUsername").keydown(function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                $("#txtU_Pass").focus();
+            }
+        });
+        $("#txtU_Pass").keydown(function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                Login();
+            }
+        });
+        $("#txtUsername").focus();
+    })
+    function Login() {
+
+        $.ajax({
+            url: "http://59.173.247.82:5928/NetAcceptLogin/Login",
+            type: 'POST',
+            dataType: "json",
+            jsonp: 'callback',
+            data: {
+                name: $("#txtUsername").val(),
+                pwd: $("#txtU_Pass").val()
+            },
+            success: function (data) {
+                if (typeof (data) == undefined || data == null || data.result != true) {
+                    $(".loginmainContent").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-280px" }, "fast").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-260px" }, "fast");
+                    $(".errorMsg").show();
+                }
+                else {
+                    var url = "";
+                    if (data.type == "2") {
+                        url = mapUrl("~/NetAcceptLogin/AllUserInfo");
+                    } else {
+                        url = mapUrl("~/Welcome");
+                    }
+                    window.location.href = url;
+                }
+            },
+            complete: function (e, e2, e3) {
+
+            }
+        });
+
+        //alert($("#masklayout").parent().html());
+    }
+
+    document.onkeydown = function (e) {
+        var ev = document.all ? window.event : e;
+        if (ev.keyCode == 13) {
+            $("#loginBtn").click();
+        }
+    }
+    document.onkeydown = function (e) {
+        var ev = document.all ? window.event : e;
+        if (ev.keyCode == 13) {
+            $("#searchBtn").click();
+        }
+    }
+
+    function clickcount() {
+        document.getElementById("userlogin").style.display = "block";
+        document.getElementById("queryreport").style.display = "none";
+        document.getElementById("tab1").className = "selected01";
+        document.getElementById("tab2").className = "";
+    }
+    function clickreport() {
+        document.getElementById("queryreport").style.display = "block";
+        document.getElementById("userlogin").style.display = "none";
+        document.getElementById("tab2").className = "selected02";
+        document.getElementById("tab1").className = "";
+    }
+</script>
+ <style type="text/css">
+
+        .code
+        {
+            background-image:url(code.jpg);
+            font-family:Arial;
+            font-style:italic;
+            color:Red;
+            border:0;
+            padding:2px 3px;
+            letter-spacing:3px;
+            font-weight:bolder;
+        }
+        .unchanged
+        {
+            border:0;
+        }
+        .Reportclss
+        {
+            
+            display: block;
+	line-height: 36px;
+	font-size: 18px;
+	color: #fff;
+	text-decoration: none;
+	padding: 0 12px;
+	background: #32b663;
+            }
+             .Reportclss1
+        {
+            
+            display: block;
+	line-height: 36px;
+	font-size: 18px;
+	color: #000000;
+	text-decoration: none;
+	padding: 0 12px;
+	background: #D0D0D0;
+            }
+     .KeyCode
+     {
+     color:gray;
+     }
+      
+</style>
+    <script language="javascript" type="text/javascript">
+
+        var code; //在全局 定义验证码
+        var isRight = null;
+        function createCode() {
+            code = "";
+            var codeLength = 6; //验证码的长度
+            var checkCode = document.getElementById("checkCode");
+            var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+
+            for (var i = 0; i < codeLength; i++) {
+
+
+                var charIndex = Math.floor(Math.random() * 34);
+                code += selectChar[charIndex];
+
+
+            }
+            //       alert(code);
+            if (checkCode) {
+                checkCode.className = "code";
+                checkCode.value = code;
+            }
+            if (isRight) {
+                var inputCode = $.trim(document.getElementById("txtReportGuid").value);
+                if (inputCode.toUpperCase() != code.toUpperCase()) {
+                    $(".errorCode").show();
+                    $(".errorCode").html("验证码输入错误！");
+                    //createCode(); //刷新验证码
+
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                } else {
+                    $(".errorCode").html("");
+                    $("#CodeBtn").hide();
+                    $("#saveBtn").show();
+
+
+
+                }
+            } else {
+                $("#CodeBtn").show();
+                $("#saveBtn").hide();
+            }
+
+        }
+        $(function () {
+
+            var reportNo = $("#Keywords").val();
+            if (reportNo == "" || $("#txtReportGuid").val() == "" || $("#txtReportCode").val() == "") {
+                $("#CodeBtn").hide();
+                $("#saveBtn").show();
+
+            } else {
+                $("#CodeBtn").hide();
+                $("#saveBtn").show();
+            }
+
+
+
+
+
+
+
+
+            $("#checkCode").click();
+            $("#txtReportGuid").blur(function () {
+                var inputCode = $.trim(document.getElementById("txtReportGuid").value);
+                if (isRight) {
+                    if (inputCode.length <= 0) {
+                        $(".errorCode").show();
+                        $(".errorCode").html("请输入验证码！");
+
+                        $("#CodeBtn").show();
+                        $("#saveBtn").hide();
+                    }
+                    else if (inputCode.toUpperCase() != code.toUpperCase()) {
+                        $(".errorCode").show();
+                        $(".errorCode").html("验证码输入错误！");
+                        //  createCode(); //刷新验证码
+                        //  $("#txtReportGuid").focus();
+                        // $("#saveBtn").attr('class', 'Reportclss1');
+                        $("#CodeBtn").show();
+                        $("#saveBtn").hide();
+                    } else {
+                        $(".errorCode").html("");
+
+                        $("#CodeBtn").hide();
+                        $("#saveBtn").show();
+
+                        //                        if (isRight) {
+                        //                            $("#saveBtn").attr('class', 'Reportclss');
+                        //                        } else {
+                        //                            Searchall();
+                        //                        }
+
+                    }
+                } else {
+                    Searchall();
+
+                }
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+            $("#txtReportCode").blur(function () {
+
+                var reportNo = $("#Keywords").val();
+                if ($.trim(reportNo) == "") {
+                    $(".errorNo").show();
+                    $(".errorNo").html("报告编号不能为空！");
+                    $("#Keywords").val("(完整报告编号)");
+                    $("#Keywords").addClass("KeyCode");
+                    // $("#Keywords").focus();
+                    // $("#saveBtn").attr('class', 'Reportclss1');
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    return false;
+                }
+                else if ($.trim($("#txtReportCode").val()) == "") {
+                    $(".errorNo").html("");
+                    $(".errorNo").show();
+                    $(".errorNo").html("请输入报告防伪码！");
+                    //   $("#txtReportCode").focus();
+                    //$("#saveBtn").attr('class', 'Reportclss1');
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    return false;
+                } else if ($.trim($("#txtReportGuid").val()) == "") {
+                    $(".errorNo").html("");
+                    $(".errorCode").hide();
+                    $(".errorCode").html("请输入验证码！");
+                    //  $("#txtReportGuid").focus();
+                    // $("#saveBtn").attr('class', 'Reportclss1');
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    return false;
+
+                } else {
+                    $(".errorNo").html("");
+                    $(".errorCode").hide();
+                    $("#Keywords").val("");
+                    $("#Keywords").removeClass("KeyCode");
+                    //$("#saveBtn").attr('class', 'Reportclss');
+                    $("#CodeBtn").hide();
+                    $("#saveBtn").show();
+                }
+                Searchall();
+            })
+
+            $("#Keywords").blur(function () {
+
+                var reportNo = $("#Keywords").val();
+                if ($.trim(reportNo) == "") {
+                    $(".errorNo").show();
+                    $(".errorNo").html("报告编号不能为空！");
+                    $("#Keywords").val("(完整报告编号)");
+                    $("#Keywords").addClass("KeyCode");
+                    // $("#Keywords").focus();
+                    //  $("#saveBtn").attr('class', 'Reportclss1');
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    return false;
+                }
+                else if ($.trim($("#txtReportCode").val()) == "") {
+                    $(".errorNo").html("");
+                    $(".errorNo").show();
+                    $(".errorNo").html("请输入报告防伪码！");
+                    //  $("#txtReportCode").focus();
+                    // $("#saveBtn").attr('class', 'Reportclss1');
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    return false;
+                } else if ($.trim($("#txtReportGuid").val()) == "") {
+                    $(".errorNo").html("");
+                    $(".errorCode").hide();
+                    $(".errorCode").html("请输入验证码！");
+                    $("#CodeBtn").show();
+                    $("#saveBtn").hide();
+                    //   $("#txtReportGuid").focus();
+                    //$("#saveBtn").attr('class', 'Reportclss1');
+
+                } else {
+                    $(".errorNo").html("");
+                    $(".errorCode").hide();
+                    $("#CodeBtn").hide();
+                    $("#saveBtn").show();
+                    $("#Keywords").val("");
+                    $("#Keywords").removeClass("KeyCode");
+
+                }
+                if ($.trim($("#txtReportCode").val()) != "") {
+                    Searchall();
+                }
+
+            })
+            $("#Keywords").focus(function () {
+                var reportNo = $("#Keywords").val();
+                if (reportNo == "(完整报告编号)") {
+                    $("#Keywords").val("");
+                }
+            });
+
+
+        })
+        function Searchall() {
+            $.ajax({
+                url: "http://59.173.247.82:5928/NetAcceptLogin/searchReport",
+                type: 'POST',
+                dataType: "text",
+                jsonp: 'callback',
+                data: {
+                    keyValue: $.trim($("#Keywords").val()),
+                    CheckCode: $.trim($("#txtReportCode").val())
+
+                },
+                success: function (data) {
+                    if (typeof (data) == undefined || data == null || data == "") {
+                        $(".loginmainContent").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-280px" }, "fast").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-260px" }, "fast");
+                        $(".errorNo").html("报告号和报告防伪码有误！！");
+                        $(".errorNo").show();
+                        //  $(".errorNo").focus();
+
+                        $("#CodeBtn").show();
+                        $("#saveBtn").hide();
+                        isRight = false;
+                    }
+                    else {
+                        if (data != "FeeCompleted") {
+                            $(".errorNo").html(" ");
+                            var url = mapUrl("~/ReportView/PreviewReportIndex");
+                            var pahturl = url + "?ID=" + data;
+
+                            $("#saveBtn").attr('href', '' + pahturl + '');
+                            $("#saveBtn").attr('target', '_blank');
+                            isRight = true;
+                            if ($.trim($("#txtReportGuid").val()).toUpperCase() == code.toUpperCase()) {
+                                $("#saveBtn").attr('class', 'Reportclss');
+                                $("#saveBtn").show();
+                                $("#CodeBtn").hide();
+                            } else {
+                                $(".errorCode").show();
+                                $(".errorCode").html("验证码输入错误！");
+                                $("#CodeBtn").show();
+                                $("#saveBtn").hide();
+                            }
+                        } else {
+                            $(".loginmainContent").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-280px" }, "fast").animate({ marginLeft: "-240px" }, "fast").animate({ marginLeft: "-260px" }, "fast");
+                            $(".errorNo").html("未缴费，不能查看报告！！");
+                            $(".errorNo").show();
+                            //  $(".errorNo").focus();
+
+                            $("#CodeBtn").show();
+                            $("#saveBtn").hide();
+                            isRight = false;
+                        }
+
+                    }
+                },
+                complete: function (e, e2, e3) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+            });
+
+        }
+        function ReportSearch() {
+            var reportNo = $("#Keywords").val();
+            if (reportNo == "") {
+                $(".errorNo").show();
+                $(".errorNo").html("报告编号不能为空！");
+                $("#Keywords").val("(完整报告编号)");
+                $("#Keywords").addClass("KeyCode");
+                // $("#Keywords").focus();
+                return false;
+            } else {
+                $("#Keywords").val("");
+                $("#Keywords").removeClass("KeyCode");
+                $(".errorNo").html(" ");
+            }
+            if ($("#txtReportGuid").val() == "") {
+                $(".errorCode").show();
+                $(".errorCode").html("请输入验证码！");
+                //  $("#txtReportGuid").focus();
+                return false;
+            } else {
+
+                $(".errorCode").html("");
+
+            }
+            if ($("#txtReportCode").val() == "") {
+                $(".errorNo").show();
+                $(".errorNo").html("请输入报告防伪码！");
+                //   $("#txtReportCode").focus();
+                return false;
+            } else {
+
+                $(".errorCode").html("");
+
+            }
+
+
+
+
+            Searchall();
+
+
+        }
+</script>
+</head>
+<body>
+<div class="loginmain">
+  <div class="loginhead">
+    <h1 class="loginlogo"><img src="css/loginlogo.png" width="267" height="48" /></h1>
+    <ul class="links">
+      <li><a href="#">返回网站</a></li>
+
+    </ul>
+  </div>
+  <div class="loginbar" style="background-image:url(css/loginbar.jpg);">
+    <div class="loginbarMain">
+      <div class="loginBox">
+        <div class="logintab">
+          <ul>
+            <li class="selected01" onclick="clickcount()" id="tab1"><a href="#">帐户登录</a></li>
+               
+            <li onclick="clickreport()" id="tab2"><a href="#">报告查询</a></li>
+            
+          </ul>
+        </div>
+        <div class="loginCotent" id="userlogin">
+          <div class="MainLogin" id="lgDiv">
+          <div class="errorMsg" style=" display:none; color:Red;text-align:center;"> 你的帐号或密码错误！ </div>
+        
+            <div class="labbox">
+              <div class="labtext">账号:</div>
+              <div class="labinput">
+                <input name="txtUsername" type="text" id="txtUsername" class="input" maxlength="30" />
+              </div>
+            </div>
+            <div class="labbox">
+              <div class="labtext">密码:</div>
+              <div class="labinput">
+                <input name="txtU_Pass" type="password" id="txtU_Pass" class="input" maxlength="30" />
+              </div>
+            </div>
+            <div class="labbox">
+              <div class="labtext"></div>
+              <div class="labinput">
+                <input type="button" class="loginBtn" onclick="Login()" />
+              </div>
+              <div class="labinput"><a href="http://59.173.247.82:5928/NetAcceptLogin/UserRegist"  class="reg" target="_blank">帐号注册</a></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="queryRepeat" style=" display:none;" id="queryreport">
+          <div id="DivBaogao" class="MainLogin">
+          <div style="height:15px;">
+            <div class="errorCode" style=" display:none; color:Red;text-align:center; "></div>
+           <div class="errorNo" style=" display:none; color:Red;text-align:center; "></div>
+           </div>
+            <div class="labbox">
+
+
+
+
+              <div class="labtext">报告编号:</div>
+              <div class="labinput">
+                <input name="Keywords" type="text" id="Keywords" maxlength="30" value="(完整报告编号)" style="height:20px;width:140px;color:gray;" />
+              </div>
+            </div>
+             <div class="labbox">
+              <div class="labtext">报告防伪码:</div>
+              <div class="labinput">
+                <input name="txtReportCode" type="text" id="txtReportCode" maxlength="30" style="height:20px;width:140px;" />
+              </div>
+            </div>
+        
+            <div class="labbox" style="height:50px;">
+              <div class="labtext"> 验证码:</div>
+              <div class="labinput">
+               <input name="txtReportGuid" type="text" id="txtReportGuid" style="height:20px;width:140px;" /><br />
+                 <a onclick="createCode();">
+                 <input name="checkCode" type="text" id="checkCode" readonly="readonly" class="unchanged" style="width: 80px" />看不清,换一张</a>
+                <a id="ShowPdf" target="_blank"></a>
+          
+              </div>
+            </div>
+            <div class="labbox">
+              <div class="labtext"></div>
+              <div class="labinput">
+             
+             <a href="#"  id="saveBtn" class="Reportclss"  onclick="createCode();" > 查询 </a>
+             <a href="#"  id="CodeBtn" class="Reportclss1" > 查询 </a>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <div class="copyrightmain">
+      <p><span >推荐IE8或以上版本浏览器，分辨率1280*800或以上显示器使用本系统,</span> 技术支持：<a href="http://www.qzsoft.net" title="成都青之软件有限责任公司" target="_blank">成都青之软件有限责任公司</a></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+ 
