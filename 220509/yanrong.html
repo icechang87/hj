@@ -26,11 +26,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="https://comres.cndocsys.cn/licensedisp/css/nurse-Computer-v2.css" />
-    <style>
-        .footer {
-            bottom:100px;
-        }
-    </style>
+    <style> @media(max-width:374px){.footer{padding-left:40px;padding-right:40px}.main{padding-left:40px;padding-right:40px;margin-top:26px}}@media(min-width:415px){.head{float:right;width:88px;height:120px;margin-top:2px}}@media(min-width:500px){.footer{padding-left:100px;padding-right:100px}.main{padding-left:100px;padding-right:100px;margin-top:26px}.head{float:right;width:88px;height:120px;margin-top:2px}}@media(min-width:600px){.footer{padding-left:120px;padding-right:120px}.main{padding-left:120px;padding-right:120px;margin-top:26px}.head{float:right;width:88px;height:120px;margin-top:2px}}@media(min-width:700px){.head{float:right;width:102px;height:140px;margin-top:2px}}@media(min-width:754px){.head{float:right;width:102px;height:140px;margin-top:2px}.wrap_qn{width:754px;margin:0 auto}} </style> <style> .head { float: right; width: 96px; height: 130px; margin-top: 2px; } .block { margin-bottom: 36px; overflow: inherit; } </style>
 </head>
 <body oncontextmenu="return false;" onselectstart="return false" ondragstart="return false;" style="background-color:#fff">
     <div class="wrap_qn">
@@ -84,7 +80,7 @@
                 </div>
                 <div class="footer">
                     <div class="newEr">
-                        <div ><img src="qrc.png"  style="width: 150px;"></div>
+                        <div ><img src="qrc.png"  style="width: 86px;"></div>
                     </div>
                     <div class="Ntip">
                         <div class="Bli" style="padding-top:30px;">
@@ -105,44 +101,44 @@
             <script src="https://cdn.staticfile.org/jquery/2.2.3/jquery.min.js"></script>
             <script src="https://cdn.staticfile.org/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-    <script>
-        var NG = 'd91df364-0f3d-4389-9394-ab2ab1976994';
-        $(function () {
-            if (NG !== '') {
-                loadCurrPhotoTianCloud();
+            <script>
+                var NG = 'd91df364-0f3d-4389-9394-ab2ab1976994';
+                $(function () {
+                    if (NG !== '') {
+                        loadCurrPhotoTianCloud();
+                        //
+                        getQr();
+                    }
+                });
+                //get cloud photo
+                function loadCurrPhotoTianCloud() {
+                    $.post("/License/GetNursePhotoUri", { ni: NG,jstk:"637877182425706049",jssn:"8904F64C998615DE83571DB236D71E83", t: new Date().valueOf() }, function (data) {
+                        if (data.result) {
+                            $("#photo").attr("src", data.message);
+                            $("#photo").attr("onerror", "phoError(this)");
+                        }
+                        else {
+                            $("#photo").attr("src", "https://comres.cndocsys.cn/no_photo2.jpg");
+                        }
+                        $("#photo").show();
+                    });
+                }
+                function imgErrorEvent(dom) {
+                    dom.src = "https://comres.cndocsys.cn/no_photo2.jpg";
+                    dom.onerror = null;
+                }
                 //
-                getQr();
-            }
-        });
-        //get cloud photo
-        function loadCurrPhotoTianCloud() {
-            $.post("/License/GetNursePhotoUri", { ni: NG,jstk:"637877170878566459",jssn:"75B55F4C03C93B8804246079CF324408", t: new Date().valueOf() }, function (data) {
-                if (data.result) {
-                    $("#photo").attr("src", data.message);
-                    $("#photo").attr("onerror", "phoError(this)");
+                function getQr() {
+                    new QRCode("newErCode", {
+                        text: "https://license.wsb003.cn/license/nurse?encry=RRsI3DY5zynjnIApVt8lbAF7CxrCtjqZOPv+colZ7kgQaTYucjA1Nej4yF2e7cPG",
+                        width: 150,
+                        height: 150,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
                 }
-                else {
-                    $("#photo").attr("src", "https://comres.cndocsys.cn/no_photo2.jpg");
-                }
-                $("#photo").show();
-            });
-        }
-        function imgErrorEvent(dom) {
-            dom.src = "https://comres.cndocsys.cn/no_photo2.jpg";
-            dom.onerror = null;
-        }
-        //
-        function getQr() {
-            new QRCode("newErCode", {
-                text: "https://license.wsb003.cn/license/nurse?encry=RRsI3DY5zynjnIApVt8lbAF7CxrCtjqZOPv+colZ7kgQaTYucjA1Nej4yF2e7cPG",
-                width: 150,
-                height: 150,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-    </script>
+            </script>
 </body>
 </html>
 
